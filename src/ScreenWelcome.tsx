@@ -1,21 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Input, Button } from "reactstrap";
+import { Container, Col, Row } from "reactstrap";
+
+import { ThemeContext, themes } from "./theme-context";
+import ThemedButton from "./themed-button";
 
 function ScreenWelcome(props: any) {
+  const history = useHistory();
+
   // STATE VARIABLES
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [error, setError] = useState("");
   const [userValid, setUserValid] = useState(false);
 
+  // LOAD EXISTING INFORMATION FROM REDUX
+  useEffect(() => {
+    if (props.user) {
+      setFirstname(props.user.firstname);
+      setLastname(props.user.lastname);
+    }
+  }, [props.user.firstname]);
+
+  // FORM VERIFICATIONS
   let submit = () => {
-    // FIRST FORM VERIFICATIONS
     let regex = "[a-zA-Z]";
     if (!firstname && !lastname) {
       setError("Please register your firstname and lastname");
@@ -31,31 +44,52 @@ function ScreenWelcome(props: any) {
     }
   };
 
-  // REDIRECTION IF VALID INFORMATION
+  // REDIRECTION ONLY IF VALID INFORMATION
   if (userValid) {
-    return <Redirect to="/screenresult" />;
+    history.push("/results");
   }
 
   return (
-    <div>
-      <h1>WELCOME SCREEN</h1>
-      <Input
-        onChange={(e) => setFirstname(e.target.value)}
-        className="Input"
-        placeholder="Firstname"
-      />
-      <Input
-        onChange={(e) => setLastname(e.target.value)}
-        className="Input"
-        placeholder="Lastname"
-      />
-      <Button onClick={() => submit()}>SUBMIT</Button>
-      <p>{error}</p>
-    </div>
+    <Container fluid>
+      <Row>
+        <div className="body">
+          <h1>WHICH STAR ARE YOU?</h1>
+          <p className="intro">
+            Please register your information to start this journey
+          </p>
+          <div className="field">
+            <p className="p1">FIRSTNAME</p>
+            <input
+              onChange={(e) => setFirstname(e.target.value.toUpperCase())}
+              className="Input"
+              value={firstname}
+              placeholder="JOHN"
+            />
+          </div>
+          <div className="field">
+            <p className="p1">LASTNAME</p>
+            <input
+              onChange={(e) => setLastname(e.target.value.toUpperCase())}
+              className="Input"
+              value={lastname}
+              placeholder="DOE"
+            />
+          </div>
+          <button className="Button" onClick={() => submit()}>
+            NEXT
+          </button>
+          <p className="error"> {error} </p>;
+        </div>
+      </Row>
+    </Container>
   );
 }
 
 // USE OF REDUX TO SHARE INFORMATION WITH OTHER COMPONENTS
+function mapStateToProps(state: any) {
+  return { user: state.user };
+}
+
 function mapDispatchToProps(dispatch: any) {
   return {
     addUser: function (firstname: string, lastname: string) {
@@ -64,4 +98,4 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(ScreenWelcome);
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenWelcome);

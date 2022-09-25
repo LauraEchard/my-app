@@ -1,9 +1,113 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+.body {
+  background-image: url("../public/background.jpg");
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  color: white;
+  padding-top: 25vh;
+}
+
+.intro {
+  font-size: 20px;
+  color: white;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+
+.p1 {
+  height: 35px;
+  width: 100px;
+  font-size: 15px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  margin-bottom: 1px;
+  background-color: black;
+  border: black;
+  border-radius: 4px;
+}
+
+.p2 {
+  height: 35px;
+  width: 120px;
+  font-size: 15px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  margin-bottom: 1px;
+  background-color: white;
+  border: black;
+  border-radius: 4px;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  font-size: 15px;
+}
+
+.Input {
+  width: 120px;
+  height: 35px;
+  margin-left: 5px;
+  margin-bottom: 1px;
+  font-size: 15px;
+  border-radius: 4px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.752);
+  border: black;
   text-align: center;
 }
 
+.Input:hover {
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+}
+
+.Input::placeholder {
+  text-align: center;
+}
+
+.Button {
+  width: 65px;
+  height: 35px;
+  font-size: 10px;
+  background-color: black;
+  color: white;
+  font-size: 15px;
+  border-radius: 5px;
+  margin: 15px 5px;
+  border: black;
+  text-align: center;
+}
+
+.Button:hover {
+  background-color: rgba(42, 39, 39, 0.822);
+}
+
+.Button-Bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .App-logo {
-  height: 40vmin;
+  height: 15vmin;
   pointer-events: none;
 }
 
@@ -11,21 +115,6 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
