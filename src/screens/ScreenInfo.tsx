@@ -3,12 +3,16 @@ import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import "./App.css";
+// STYLE
+import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "reactstrap";
 import { Container, Col, Row } from "reactstrap";
 
-function ScreenResult(props: any) {
+// CONTEXTUAL COMPONENTS
+import ThemedField from "../contexts/themed-field";
+import ThemedBackground from "../contexts/themed-background";
+
+function ScreenInfo(props: any) {
   const history = useHistory();
 
   // STATE VARIABLES
@@ -20,14 +24,24 @@ function ScreenResult(props: any) {
 
   useEffect(() => {
     if (props.user) {
-      // REQUEST TO THE API
+      // REQUEST TO THE API & COMMUNICATION TO REDUCER
       const genderInfo = async () => {
         const data = await fetch(
           "https://api.genderize.io?name=" + props.user.firstname
         );
         const body = await data.json();
-        props.addGender(body.gender, body.probability * 100);
-        setGender(body.gender);
+        if (!body.gender || !body.probability) {
+          setError("Sorry, there was an error with your research");
+        }
+        let starType = "";
+        if (body.gender === "female") {
+          starType = "GIGASTAR";
+        } else if (body.gender === "male") {
+          starType = "MEGASTAR";
+        }
+
+        props.addGender(starType, body.probability * 100);
+        setGender(starType);
         setProbability(body.probability * 100);
       };
       genderInfo();
@@ -46,7 +60,6 @@ function ScreenResult(props: any) {
 
   // SECOND FORM VERIFICATIONS
   let submit = () => {
-    console.log("clicksubmit");
     if (age) {
       props.addAge(age);
       setAgeValid(true);
@@ -57,28 +70,27 @@ function ScreenResult(props: any) {
 
   // REDIRECTION IF VALID INFORMATION
   if (ageValid) {
-    console.log("redirection");
-    history.push("/summary");
+    history.push("/results");
   }
 
   return (
     <Container fluid>
       <Row>
-        <div className="body">
-          <h1>DISCOVER YOUR RESULTS</h1>
-          <p className="intro">
+        <ThemedBackground>
+          <h1>ALMOST THERE!</h1>
+          <p className="Intro">
             Please register your age to complete your profile
           </p>
-          <div className="field">
-            <p className="p1">FIRSTNAME</p>
-            <p className="p2">{props.user.firstname.toUpperCase()}</p>
+          <div className="Field">
+            <ThemedField>FIRSTNAME</ThemedField>
+            <p className="p2">{props.user.firstname}</p>
           </div>
-          <div className="field">
-            <p className="p1">LASTNAME</p>
-            <p className="p2">{props.user.lastname.toUpperCase()}</p>
+          <div className="Field">
+            <ThemedField>LASTNAME</ThemedField>
+            <p className="p2">{props.user.lastname}</p>
           </div>
-          <div className="field">
-            <p className="p1">STAR TYPE</p>
+          <div className="Field">
+            <ThemedField>STAR TYPE</ThemedField>
             <p className="p2">
               {props.user.gender
                 ? props.user.gender.toUpperCase()
@@ -86,14 +98,14 @@ function ScreenResult(props: any) {
             </p>
           </div>
 
-          <div className="field">
-            <p className="p1">PROBABILITY</p>
+          <div className="Field">
+            <ThemedField>PROBABILITY</ThemedField>
             <p className="p2">
               {props.user.proba ? props.user.proba : probability}%
             </p>
           </div>
-          <div className="field">
-            <p className="p1">AGE</p>
+          <div className="Field">
+            <ThemedField>AGE</ThemedField>
             <input
               className="Input"
               type="number"
@@ -102,6 +114,7 @@ function ScreenResult(props: any) {
               value={age}
               onChange={(e) => setAge(e.target.value)}
               placeholder="IN YEARS"
+              max={999}
             />
           </div>
           <div className="Buttons-Bar">
@@ -112,8 +125,8 @@ function ScreenResult(props: any) {
               NEXT
             </button>
           </div>
-          <p className="error">{error}</p>
-        </div>
+          <p className="Error">{error}</p>
+        </ThemedBackground>
       </Row>
     </Container>
   );
@@ -135,4 +148,4 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScreenResult);
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenInfo);

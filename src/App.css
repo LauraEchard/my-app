@@ -1,7 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
-
-.body {
+.Dark-body {
   background-image: url("../public/background.jpg");
   background-size: cover;
   height: 100vh;
@@ -10,22 +7,35 @@
   align-items: center;
   font-size: 10px;
   color: white;
-  padding-top: 25vh;
+  padding-top: 10vh;
 }
 
-.intro {
+.Light-body {
+  background-image: url("../public/background.jpg");
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  color: white;
+  padding-top: 10vh;
+  opacity: 0.9;
+}
+
+.Intro {
   font-size: 20px;
   color: white;
 }
 
-.field {
+.Field {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 5px;
 }
 
-.p1 {
+.Dark-p1 {
   height: 35px;
   width: 100px;
   font-size: 15px;
@@ -40,9 +50,24 @@
   border-radius: 4px;
 }
 
+.Light-p1 {
+  height: 35px;
+  width: 100px;
+  font-size: 15px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  margin-bottom: 1px;
+  background-color: rgb(151, 116, 116);
+  border: black;
+  border-radius: 4px;
+}
+
 .p2 {
   height: 35px;
-  width: 120px;
+  width: 200px;
   font-size: 15px;
   color: black;
   display: flex;
@@ -55,14 +80,24 @@
   border-radius: 4px;
 }
 
-.error {
+.Corentin {
+  width: 60vh;
+  height: auto;
+  font-size: 15px;
+  color: white;
+  background-color: rgb(151, 116, 116, 0.5);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.Error {
   color: red;
   text-align: center;
   font-size: 15px;
 }
 
 .Input {
-  width: 120px;
+  width: 200px;
   height: 35px;
   margin-left: 5px;
   margin-bottom: 1px;
@@ -75,7 +110,7 @@
 }
 
 .Input:hover {
-  background-color: rgba(255, 255, 255, 0.45);
+  background-color: rgba(255, 255, 255, 0.7);
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
 }
 
@@ -84,10 +119,10 @@
 }
 
 .Button {
-  width: 65px;
+  width: 75px;
   height: 35px;
   font-size: 10px;
-  background-color: black;
+  background-color: rgb(78, 59, 59);
   color: white;
   font-size: 15px;
   border-radius: 5px;
@@ -97,14 +132,50 @@
 }
 
 .Button:hover {
-  background-color: rgba(42, 39, 39, 0.822);
+  background-color: rgba(42, 39, 39, 0.9);
 }
 
-.Button-Bar {
+.Dark-Button {
+  color: white;
+  background-color: black;
+  width: 150px;
+  height: 35px;
+  font-size: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  margin: 15px 5px;
+  border: black;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+.Light-Button {
+  color: black;
+  background-color: rgb(151, 116, 116);
+  width: 150px;
+  height: 35px;
+  font-size: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  margin: 15px 5px;
+  border: black;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Icon {
+  margin-left: 5px;
+}
+
+.Gif {
+  height: 25vh;
+}
+
+/* FOR SPINNING LOGO */
 
 .App-logo {
   height: 15vmin;

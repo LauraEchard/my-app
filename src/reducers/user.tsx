@@ -3,16 +3,16 @@ export default function (
   action: any
 ) {
   if (action.type === "addUser") {
-    console.log("reducer NAME", action.firstname, action.lastname);
+    // REGISTER INFORMATION FROM FIRST FORM
     user.firstname = action.firstname;
     user.lastname = action.lastname;
     return user;
   } else if (action.type === "addAge") {
-    console.log("reducer AGE =>", user.age);
+    // REGISTER INFORMATION FROM SECOND FORM
     user.age = action.age;
     return user;
   } else if (action.type === "addGender") {
-    console.log("reducer GENDER =>", user.gender, user.proba);
+    // REGISTER INFORMATION FROM GENDER API
     user.gender = action.gender;
     user.proba = action.proba;
     return user;

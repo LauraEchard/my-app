@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import "./App.css";
+// STYLE
+import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Col, Row } from "reactstrap";
 
-import { ThemeContext, themes } from "./theme-context";
-import ThemedButton from "./themed-button";
+// CONTEXTUAL COMPONENTS
+import ThemedButton from "../contexts/themed-button";
+import ThemedField from "../contexts/themed-field";
+import ThemedBackground from "../contexts/themed-background";
 
 function ScreenWelcome(props: any) {
   const history = useHistory();
@@ -46,40 +49,41 @@ function ScreenWelcome(props: any) {
 
   // REDIRECTION ONLY IF VALID INFORMATION
   if (userValid) {
-    history.push("/results");
+    history.push("/info");
   }
 
   return (
     <Container fluid>
       <Row>
-        <div className="body">
+        <ThemedBackground>
           <h1>WHICH STAR ARE YOU?</h1>
-          <p className="intro">
-            Please register your information to start this journey
-          </p>
-          <div className="field">
-            <p className="p1">FIRSTNAME</p>
+          <p className="Intro">Let's find out about this great mystery</p>
+          <div className="Field">
+            <ThemedField>FIRSTNAME</ThemedField>
             <input
               onChange={(e) => setFirstname(e.target.value.toUpperCase())}
               className="Input"
               value={firstname}
               placeholder="JOHN"
+              maxLength={20}
             />
           </div>
-          <div className="field">
-            <p className="p1">LASTNAME</p>
+          <div className="Field">
+            <ThemedField>LASTNAME</ThemedField>
             <input
               onChange={(e) => setLastname(e.target.value.toUpperCase())}
               className="Input"
               value={lastname}
               placeholder="DOE"
+              maxLength={20}
             />
           </div>
           <button className="Button" onClick={() => submit()}>
             NEXT
           </button>
-          <p className="error"> {error} </p>;
-        </div>
+          <p className="Error"> {error} </p>
+          <ThemedButton>MODE</ThemedButton>
+        </ThemedBackground>
       </Row>
     </Container>
   );
