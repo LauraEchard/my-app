@@ -26,7 +26,7 @@ function ScreenResults(props: any) {
     message = (
       <p className="Corentin">
         Hello Corentin, merci d'avoir testé l'appli ! J'espère que tu apprécies
-        ce magnifique gif de Mariah Carey :) À bientôt pour en discuter !
+        ce magnifique gif :) À bientôt pour en discuter !
       </p>
     );
     gifUrl = "https://media.giphy.com/media/KBUOA871uShQ6zPHDf/giphy.gif";
